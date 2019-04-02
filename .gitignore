@@ -5,6 +5,7 @@ npm-debug.log
 yarn-error.log
 target/
 public/javascripts/
+public/stylesheets/
 project/project/target/config-classes/
 project/target/
 

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/pokernight.iml" filepath="$PROJECT_DIR$/pokernight.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/play-scala-seed.iml" filepath="$PROJECT_DIR$/.idea/modules/play-scala-seed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/play-scala-seed-build.iml" filepath="$PROJECT_DIR$/.idea/modules/play-scala-seed-build.iml" />
     </modules>
   </component>
 </project>
