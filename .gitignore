@@ -8,6 +8,8 @@ public/javascripts/
 project/project/target/config-classes/
 project/target/
 
+public/stylesheets/
+
 # Editor directories and files
 .idea
 *.suo
