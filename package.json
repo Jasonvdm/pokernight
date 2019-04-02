@@ -3,8 +3,7 @@
   "scripts": {
     "watch": "webpack --watch",
     "app": "tape ./app/js/*.{js,vue}",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "watch": {
     "build": "app/js/*.{js,vue}"
@@ -35,7 +34,6 @@
     "vue-loader": "^13.5.0",
     "vue-template-compiler": "^2.5.3",
     "vuetify-loader": "^1.0.5",
-    "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4"
+    "webpack": "^3.8.1"
   }
 }
