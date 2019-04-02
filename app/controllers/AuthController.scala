@@ -19,6 +19,6 @@ class AuthController @Inject()(cc: ControllerComponents) extends AbstractControl
       System.out.println(name)
       System.out.println(code)
     }
-    Ok("yes")
+    Ok(Json.toJson(true))
   }
 }
