@@ -16,9 +16,9 @@ class AuthController @Inject()(cc: ControllerComponents) extends AbstractControl
     if (jsonDump.isDefined) {
       val name: String = (jsonDump.get \ "username").as[String]
       val code: Int = (jsonDump.get \ "code").as[Int]
-      System.out.println(name)
-      System.out.println(code)
+      Ok(Json.toJson(true))
+    } else {
+      Ok(Json.toJson(false))
     }
-    Ok(Json.toJson(true))
   }
 }
