@@ -9,9 +9,6 @@ import play.api.mvc._
 class AuthController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
 
   def authenticatePlayer() = Action { implicit request: Request[AnyContent] =>
-    System.out.println(request.hasBody)
-    System.out.println(request.body.asJson)
-
     val jsonDump = request.body.asJson
     if (jsonDump.isDefined) {
       val name: String = (jsonDump.get \ "username").as[String]
