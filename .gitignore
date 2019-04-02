@@ -5,6 +5,8 @@ npm-debug.log
 yarn-error.log
 target/
 public/javascripts/
+project/project/target/config-classes/
+project/target/
 
 # Editor directories and files
 .idea
