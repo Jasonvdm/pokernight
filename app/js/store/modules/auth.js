@@ -21,7 +21,11 @@ const actions = {
         // commit('setCheckoutStatus', null)
         // // empty cart
         // commit('setCartItems', { items: [] })
-        Api().get('/wordwise/entries?limit=1&headword=');
+        //debugger;
+        Api().post('/authenticate_player', {
+            'username': credentials.username,
+            'code': credentials.code
+        });
     }
 }
 

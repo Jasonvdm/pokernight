@@ -1,30 +1,37 @@
 <template>
-    <b-container class="login">
-        <h2>Login</h2>
+    <b-container fluid class="login">
         <v-form
                 ref="form"
                 v-model="valid"
                 lazy-validation
         >
-            <v-flex md12>
-                <v-text-field
-                        label="Username"
-                        outline
-                ></v-text-field>
-            </v-flex>
-            <v-flex md12>
-                <v-text-field
-                        label="Password"
-                        outline
-                ></v-text-field>
-            </v-flex>
-            <v-btn
-                    :disabled="false"
-                    block color="primary" dark
-                    @click="login()"
+            <b-form-group
+                    id="usernameGroup"
+                    label="Username:"
+                    label-for="username"
+                    description="Your dope username"
             >
-                Login
-            </v-btn>
+                <b-form-input
+                        id="username"
+                        type="text"
+                        v-model="username"
+                        required
+                        placeholder="Enter your username" />
+            </b-form-group>
+            <b-form-group
+                    id="codeGroup"
+                    label="Code:"
+                    label-for="code"
+                    description="Do what you gotta do"
+            >
+                <b-form-input
+                        id="code"
+                        type="text"
+                        v-model="code"
+                        required
+                        placeholder="Enter your code" />
+            </b-form-group>
+            <b-button :disabled="!code || !username" block variant="primary" @click="login()">Enter the vault</b-button>
         </v-form>
     </b-container>
 </template>
@@ -33,7 +40,9 @@
     export default {
         name: 'Login',
         data: () => ({
-            valid: true
+            valid: true,
+            username: null,
+            code: null
         }),
         methods: {
             validate () {
@@ -42,7 +51,10 @@
                 }
             },
             login () {
-                this.$store.dispatch('auth/login');
+                this.$store.dispatch('auth/login', {
+                    'username': this.username,
+                    'code': parseInt(this.code)
+                });
             }
         }
     }
