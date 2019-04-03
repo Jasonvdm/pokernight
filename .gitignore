@@ -10,7 +10,7 @@ project/project/target/config-classes/
 project/target/
 
 # Editor directories and files
-.idea
+.idea/
 *.suo
 *.ntvs*
 *.njsproj

@@ -2,8 +2,15 @@
     <b-container class="app">
         <b-row>
             <h1 class="text-center">For The Boys</h1>
-            <Balance></Balance>
-            <TransactionsTable></TransactionsTable>
+        </b-row>
+        <b-row>
+            <div v-if="false">
+                <Balance></Balance>
+                <TransactionsTable></TransactionsTable>
+            </div>
+            <div style="width: 100%;" v-else>
+                <Login></Login>
+            </div>
         </b-row>
     </b-container>
 </template>
@@ -11,12 +18,14 @@
 <script>
     import TransactionsTable from './components/TransactionsTable.vue'
     import Balance from './components/Balance.vue'
+    import Login from './components/Login.vue'
 
     export default {
         name: 'app',
         components: {
             TransactionsTable,
-            Balance
+            Balance,
+            Login
         },
         data () {
             return {}
@@ -51,4 +60,10 @@
     a {
         color: #42b983;
     }
+</style>
+
+<style lang="stylus">
+    $color-pack = false
+
+    @import '~vuetify/src/stylus/main'
 </style>
