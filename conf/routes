@@ -7,7 +7,8 @@
 GET     /                                   controllers.HomeController.index
 
 POST /authenticate_player       controllers.AuthController.authenticatePlayer
-GET /dashboard/player       controllers.PlayerDashboardController.getPlayerDashboard
+GET /player       controllers.PlayerController.getPlayer
+POST /transactions       controllers.TransactionsController.createTransaction
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
