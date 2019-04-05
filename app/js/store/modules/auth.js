@@ -1,43 +1,33 @@
-//import shop from '../../api/shop'
 import Api from '../../Api'
-// initial state
-// shape: [{ id, quantity }]
+
 const state = {
-    items: [],
-    checkoutStatus: null
+    token: null
 };
 
-// getters
 const getters = {
-    isLoggedIn: (state, getters, rootState) => {
-        return state.loggedIn;
-    }
+    // isLoggedIn: (state, getters, rootState) => {
+    //     return state.loggedIn;
+    // }
 };
 
-// actions
 const actions = {
     login ({ commit, state }, credentials) {
-        // const savedCartItems = [...state.items]
-        // commit('setCheckoutStatus', null)
-        // // empty cart
-        // commit('setCartItems', { items: [] })
-        //debugger;
         Api().post('/authenticate_player', {
             'username': credentials.username,
             'code': credentials.code
+        }).then(function (response) {
+            if (response.status === 200) {
+                commit('setSessionToken', response.data);
+            }
         });
     }
-}
+};
 
-// mutations
 const mutations = {
-    pushProductToCart (state, { id }) {
-        state.items.push({
-            id,
-            quantity: 1
-        })
+    setSessionToken (state, { token }) {
+        state.token = token;
     }
-}
+};
 
 export default {
     namespaced: true,

@@ -3,7 +3,7 @@
         <b-row><h2>Transactions</h2></b-row>
         <b-row>
             <b-col>
-                <div class="shadow text-center p-3 mb-5 bg-primary rounded text-white">
+                <div class="shadow text-center p-3 mb-5 bg-light rounded text-white">
                     <p class="font-weight-bold">Best Night</p>
                     <p class="display-3">+$22</p>
                 </div>
