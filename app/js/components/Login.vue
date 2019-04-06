@@ -1,6 +1,6 @@
 <template>
     <b-container fluid class="login">
-        <v-form
+        <b-form
                 ref="form"
                 v-model="valid"
                 lazy-validation
@@ -32,7 +32,7 @@
                         placeholder="Enter your code" />
             </b-form-group>
             <b-button :disabled="!code || !username" block variant="primary" @click="login()">Enter the vault</b-button>
-        </v-form>
+        </b-form>
     </b-container>
 </template>
 
