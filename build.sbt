@@ -11,3 +11,5 @@ crossScalaVersions := Seq("2.12.6", "2.11.12")
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.1" % Test
+libraryDependencies += jdbc
+libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.41"
