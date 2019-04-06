@@ -19,6 +19,9 @@
         },
         data () {
             return {}
+        },
+        beforeMount () {
+            this.$store.dispatch('user/fetchUserData');
         }
     }
 </script>

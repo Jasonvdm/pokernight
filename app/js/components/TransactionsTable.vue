@@ -5,24 +5,24 @@
             <b-col>
                 <div class="shadow text-center p-3 mb-5 bg-light rounded text-white">
                     <p class="font-weight-bold">Best Night</p>
-                    <p class="display-3">+$22</p>
+                    <p class="display-3">{{ statisticsBest | currency }}</p>
                 </div>
             </b-col>
             <b-col>
                 <div class="shadow text-center p-3 mb-5 bg-danger rounded text-white">
                     <p class="font-weight-bold">Worst Night</p>
-                    <p class="display-3">-$15</p>
+                    <p class="display-3">{{ statisticsWorst | currency }}</p>
                 </div>  		</b-col>
             <b-col>
                 <div class="shadow text-center p-3 mb-5 bg-secondary rounded text-white">
                     <p class="font-weight-bold">Average per Night</p>
-                    <p class="display-3">+$4</p>
+                    <p class="display-3">{{ statisticsAvg | currency }}</p>
                 </div>  		</b-col>
         </b-row>
         <b-row>
             <b-table
                     id="myTable"
-                    :items="items"
+                    :items="transactions"
                     :per-page="perPage"
                     :current-page="currentPage"
                     small striped hover
@@ -43,18 +43,24 @@
         data () {
             return {
                 perPage: 5,
-                currentPage: 1,
-                items: [
-                    { date: '3/25', amount: '-$5', type: 'Buy In', total: '$43.75' },
-                    { date: '3/17', amount: '+$13.75', type: 'Buy Out', total: '$48.75' },
-                    { date: '3/17', amount: '-$5', type: 'Buy In', total: '$35' },
-                    { date: '3/17', amount: '-$5', type: 'Buy In', total: '$40' }
-                ]
+                currentPage: 1
             }
         },
         computed: {
             rows() {
-                return this.items.length
+                return this.transactions.length
+            },
+            transactions() {
+                return this.$store.getters['user/getUserTransactions'];
+            },
+            statisticsBest() {
+                return this.$store.getters['user/getUserStatistics'].best;
+            },
+            statisticsWorst() {
+                return this.$store.getters['user/getUserStatistics'].worst;
+            },
+            statisticsAvg() {
+                return this.$store.getters['user/getUserStatistics'].average;
             }
         }
     }

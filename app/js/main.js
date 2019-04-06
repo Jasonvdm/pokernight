@@ -4,7 +4,8 @@ import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
 import BootstrapVue from 'bootstrap-vue'
 import AtUI from 'at-ui'
-
+import Vue2Filters from 'vue2-filters'
+import VueMoment from 'vue-moment'
 
 import "./bootstrap.min.css"
 
@@ -23,6 +24,8 @@ Vue.use(Vuetify);
 Vue.use(BootstrapVue);
 Vue.use(Vuex);
 Vue.use(AtUI);
+Vue.use(Vue2Filters);
+Vue.use(VueMoment);
 
 const routes = [
     {
