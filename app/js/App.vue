@@ -1,7 +1,42 @@
 <template>
-    <Layout>
-        <router-view></router-view>
-    </Layout>
+    <q-layout>
+        <q-layout-drawer v-model="leftDrawer" side="left">
+            yo
+        </q-layout-drawer>
+        <q-page-container>
+            <q-toolbar color="blue-grey-6">
+                <q-icon size="lg" name="fas fa-chess-king" />
+                <q-toolbar-title>
+                    PokerNight
+                    <span slot="subtitle">
+                      For the boys
+                    </span>
+                </q-toolbar-title>
+                <q-btn
+                        :color="navColor('transactions')"
+                        @click="navigate('transactions')"
+                        size="lg"
+                        flat round dense icon="attach_money"></q-btn>
+                <q-btn
+                        :color="navColor('charts')"
+                        @click="navigate('charts')"
+                        size="lg"
+                        flat round dense icon="show_chart"></q-btn>
+                <q-btn
+                        :color="navColor('dashboard')"
+                        @click="navigate('dashboard')"
+                        size="lg"
+                        flat round dense icon="account_circle"></q-btn>
+                <q-btn
+                        :color="navColor('admin')"
+                        @click="navigate('admin')"
+                        size="lg"
+                        flat round dense icon="fas fa-user-shield"></q-btn>
+            </q-toolbar>
+            <q-ajax-bar color="orange-12" />
+            <router-view></router-view>
+        </q-page-container>
+    </q-layout>
 </template>
 
 <script>
@@ -13,42 +48,34 @@
             Layout
         },
         data () {
-            return {}
+            return {
+                leftDrawer: false,
+                loading: false
+            }
+        },
+        computed: {},
+        methods: {
+            refresher (done) {
+                // done - Function to call when you made all necessary updates.
+                //        DO NOT forget to call it otherwise the refresh message
+                //        will continue to be displayed
+
+                // make some Ajax call then call done()
+                done();
+            },
+            navigate (page) {
+                this.$router.push(page);
+            },
+            navColor(color) {
+                return color === this.$router.currentRoute.name ? 'orange-12' : 'light'
+            }
         }
     }
 </script>
 
-<style lang="scss">
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
+<style lang="scss" scoped>
+    .q-toolbar-title {
+        text-align: left;
+        padding-left: 10px;
     }
-
-    h1, h2 {
-        font-weight: normal;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
-    }
-</style>
-
-<style lang="stylus">
-    $color-pack = false
-
-    @import '~vuetify/src/stylus/main'
 </style>
