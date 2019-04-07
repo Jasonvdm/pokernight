@@ -5,9 +5,15 @@ import BootstrapVue from 'bootstrap-vue'
 import Vue2Filters from 'vue2-filters'
 import VueMoment from 'vue-moment'
 
-import "./bootstrap.min.css"
+import Quasar from "quasar-framework/dist/umd/quasar.ios.umd.min.js";
+import "quasar-framework/dist/umd/quasar.ios.min.css";
+import "quasar-framework/dist/umd/quasar.ios.rtl.min.css";
+//import "quasar/dist/quasar.addon.css"
+//import "quasar/dist/quasar.rtl.css"
 
-import "bootstrap-vue/dist/bootstrap-vue.css"
+//import "./bootstrap.min.css"
+
+//import "bootstrap-vue/dist/bootstrap-vue.css"
 
 import App from './App.vue'
 import store from './store'
@@ -21,6 +27,7 @@ Vue.use(BootstrapVue);
 Vue.use(Vuex);
 Vue.use(Vue2Filters);
 Vue.use(VueMoment);
+Vue.use(Quasar);
 
 const routes = [
     {

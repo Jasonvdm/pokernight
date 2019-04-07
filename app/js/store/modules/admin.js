@@ -12,7 +12,7 @@ const getters = {
 
 const actions = {
     fetchAllTransactions ({ commit, state }) {
-        Api().get('/admin/transactions').then(function (response) {
+        return Api().get('/admin/transactions').then(function (response) {
             if (response.status === 200) {
                 commit('setAllTransactions', response.data);
             }
