@@ -8,6 +8,7 @@ project/project/target/config-classes/
 project/target/
 package-lock.json
 
+
 # Editor directories and files
 .idea/
 *.suo
