@@ -1,6 +1,6 @@
 <template>
     <div class="balance">
-        <div v-if="loading" class="loader">
+        <div v-if="isLoading" class="loader">
             <q-spinner-facebook color="blue-grey-6" :size="60" />
         </div>
         <div class="q-pa-sm" v-else>
@@ -14,43 +14,23 @@
                     size="lg"
             >
                 <template slot="top-selection" slot-scope="props">
-                    <q-btn color="secondary" flat label="Approve" class="q-mr-sm" @click="approveTransaction()" />
-                    <q-btn color="negative" flat label="Decline" @click="declineTransaction()" />
+                    <q-btn color="secondary" label="Approve" class="q-mr-sm" @click="approveTransaction()" />
+                    <q-btn color="negative" label="Decline" @click="declineTransaction()" />
                 </template>
             </q-table>
-
-            <!--<b-row>-->
-                <!--<b-table-->
-                        <!--id="myTable"-->
-                        <!--:fields="fields"-->
-                        <!--:items="pendingTransactions"-->
-                        <!--:per-page="perPage"-->
-                        <!--:current-page="currentPage"-->
-                        <!--striped hover small-->
-                <!--&gt;-->
-                    <!--<template slot="approval" slot-scope="data">-->
-                        <!--<b-button v-if="data.item.status === null" size="sm" variant="success" @click="approveTransaction(data.item.id)">Approve</b-button>-->
-                        <!--<b-button v-if="data.item.status === null" size="sm" variant="danger" @click="declineTransaction(data.item.id)">Decline</b-button>-->
-                    <!--</template>-->
-                <!--</b-table>-->
-                <!--<b-pagination-->
-                        <!--v-model="currentPage"-->
-                        <!--:total-rows="rows"-->
-                        <!--:per-page="perPage"-->
-                        <!--aria-controls="myTable"-->
-                        <!--size="sm"-->
-                        <!--class="mt-4"-->
-                <!--&gt;-->
-                    <!--<span class="text-success" slot="first-text">First</span>-->
-                    <!--<span class="text-danger" slot="prev-text">Prev</span>-->
-                    <!--<span class="text-warning" slot="next-text">Next</span>-->
-                    <!--<span class="text-info" slot="last-text">Last</span>-->
-                    <!--<span slot="page" slot-scope="{ page, active }">-->
-                    <!--<b v-if="active">{{ page }}</b>-->
-                    <!--<i v-else>{{ page }}</i>-->
-                <!--</span>-->
-                <!--</b-pagination>-->
-            <!--</b-row>-->
+            <q-table
+                    title="Games"
+                    :data="games"
+                    :columns="gamesFields"
+                    row-key="id"
+                    size="lg"
+                    class="q-mt-lg"
+            >
+                <template slot="top-right" slot-scope="props">
+                    <q-datetime style="width: 170px;" v-model="newGameDate" type="date" />
+                    <q-btn color="secondary" flat label="Add" class="q-mr-sm" @click="addGame()" />
+                </template>
+            </q-table>
         </div>
     </div>
 </template>
@@ -60,17 +40,31 @@
         name: 'AdminDashboard',
         data () {
             return {
-                perPage: 5,
-                currentPage: 1,
+                selectedSecond: [],
                 loading: true,
-                selectedSecond: [
+                newGameDate: null,
+                gamesFields: [
+                    {
+                        name: 'date',
+                        required: true,
+                        label: 'Date',
+                        align: 'left',
+                        field: 'date',
+                        sortable: true,
+                        classes: 'my-class',
+                        style: ''
+                    },
+                    {
+                        name: 'playerCount',
+                        required: true,
+                        label: 'Players Count',
+                        align: 'left',
+                        field: 'playerCount',
+                        sortable: true,
+                        classes: 'my-class',
+                        style: ''
+                    },
                 ],
-                pagination: {
-                    sortBy: null, // String, column "name" property value
-                    descending: false,
-                    page: 1,
-                    rowsPerPage: 5 // current rows per page being displayed
-                },
                 fields: [
                     {
                         name: 'date',
@@ -106,6 +100,9 @@
             }
         },
         computed: {
+            isLoading () {
+                return this.$data.loading;
+            },
             rows() {
                 return this.pendingTransactions.length
             },
@@ -115,22 +112,46 @@
                         return transaction.status === null;
                     });
             },
+            games() {
+                return this.$store.getters['admin/getAllGames'];
+            }
         },
         methods: {
-            approveTransaction(transactionId) {
-                // this.selectedSecond
-                //this.$store.dispatch('admin/approveTransaction', transactionId);
+            approveTransaction() {
+                let self = this;
+                self.$data.loading = true;
+                let transactionIds = this.selectedSecond.map(function (s) { return s.id; });
+                this.$store.dispatch('admin/approveTransaction', transactionIds).then(() => {
+                    self.$data.loading = false;
+                    self.selectedSecond = [];
+                });
             },
-            declineTransaction(transactionId) {
-                // this.selectedSecond
-                //this.$store.dispatch('admin/declineTransaction', transactionId);
+            declineTransaction() {
+                let self = this;
+                self.$data.loading = true;
+                let transactionIds = this.selectedSecond.map(function (s) { return s.id; });
+                this.selectedSecond = [];
+                this.$store.dispatch('admin/declineTransaction', transactionIds).then(() => {
+                    self.$data.loading = false;
+                    self.selectedSecond = [];
+                });
+            },
+            addGame() {
+                let self = this;
+                self.$data.loading = true;
+                this.$store.dispatch('admin/addGame', this.newGameDate).then(() => {
+                    self.$data.loading = false;
+                });
             }
         },
         beforeMount () {
             let self = this;
             this.$store.dispatch('admin/fetchAllTransactions')
                 .then(() => {
-                    self.$data.loading = false;
+                    this.$store.dispatch('admin/fetchAllGames')
+                        .then(() => {
+                            self.$data.loading = false;
+                        });
                 });
         }
     }

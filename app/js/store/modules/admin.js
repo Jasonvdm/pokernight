@@ -1,12 +1,37 @@
 import Api from '../../Api'
 
 const state = {
-    transactions: null
+    transactions: null,
+    games: [
+        {
+            'id': '4',
+            'date': '4/17',
+            'playerCount': 6,
+        },
+        {
+            'id': '3',
+            'date': '4/10',
+            'playerCount': 5,
+        },
+        {
+            'id': '2',
+            'date': '4/9',
+            'playerCount': 8,
+        },
+        {
+            'id': '1',
+            'date': '4/5',
+            'playerCount': 3,
+        },
+    ]
 };
 
 const getters = {
     getAllTransactions: (state, getters, rootState) => {
         return state.transactions ? state.transactions : [];
+    },
+    getAllGames: () => {
+        return state.games;
     }
 };
 
@@ -18,29 +43,66 @@ const actions = {
             }
         });
     },
-    approveTransaction ({ commit, dispatch }, transactionId) {
-        Api().put('/admin/transactions', {
-            id: transactionId,
-            status: true
-        }).then(function (response) {
-            if (response.status === 200) {
-                dispatch('fetchAllTransactions');
-            }
+    fetchAllGames ({ commit, state }) {
+        // TODO
+    },
+    approveTransaction ({ commit, dispatch }, transactionIds) {
+        transactionIds.forEach((transactionId) => {
+            Api().put('/admin/transactions', {
+                id: transactionId,
+                status: true
+            }).then(function (response) {
+                if (response.status === 200) {
+                    commit('markTransactionApproved', transactionId);
+                }
+            });
         });
     },
-    declineTransaction ({ commit, dispatch }, transactionId) {
-        Api().put('/admin/transactions', {
-            id: transactionId,
-            status: false
-        }).then(function (response) {
-            if (response.status === 200) {
-                dispatch('fetchAllTransactions');
-            }
+    declineTransaction ({ commit, dispatch }, transactionIds) {
+        transactionIds.forEach((transactionId) => {
+            Api().put('/admin/transactions', {
+                id: transactionId,
+                status: false
+            }).then(function (response) {
+                if (response.status === 200) {
+                    commit('markTransactionDeclined', transactionId);
+                }
+            });
         });
+    },
+    addGame ({ commit, dispatch }, newGameDate) {
+        // Api().post('/admin/games', {
+        //     date: newGameDate
+        // }).then(function (response) {
+        //     if (response.status === 200) {
+                commit('addGame', {
+                    id: 5,
+                    date: new Date(newGameDate).getMonth() + '/' + new Date(newGameDate).getDate(),
+                    playerCount: 0
+                });
+            // }
+        // });
     }
 };
 
 const mutations = {
+    addGame (state, game) {
+        state.games.unshift(game);
+    },
+    markTransactionApproved (state, transactionId) {
+        state.transactions.map(function (e) {
+            if (e.id === transactionId) {
+                e.status = true
+            }
+        });
+    },
+    markTransactionDeclined (state, transactionId) {
+        state.transactions.map(function (e) {
+            if (e.id === transactionId) {
+                e.status = false
+            }
+        });
+    },
     setAllTransactions (state, transactionsData) {
         state.transactions = transactionsData.map((transaction) => {
             return {
