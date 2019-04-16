@@ -21,6 +21,7 @@ import store from './store'
 import Login from './components/Login.vue'
 import Dashboard from './components/Dashboard.vue'
 import AdminDashboard from './components/AdminDashboard.vue'
+import Stats from './components/Stats.vue'
 
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
@@ -48,6 +49,11 @@ const routes = [
         path: '/admin',
         name: 'admin',
         component: AdminDashboard
+    },
+    {
+        path: '/stats',
+        name: 'stats',
+        component: Stats
     }
 ];
 

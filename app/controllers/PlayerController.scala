@@ -19,22 +19,26 @@ class PlayerController @Inject()(cc: ControllerComponents) extends AbstractContr
         Json.obj(
           "date" -> "2019-04-03T02:13:37+0000",
           "amount" -> 200,
-          "balance" -> 300
+          "balance" -> 300,
+          "type" -> "cash_out"
         ),
         Json.obj(
           "date" -> "2019-03-27T02:13:37+0000",
           "amount" -> -100,
-          "balance" -> 100
+          "balance" -> 100,
+          "type" -> "buy_in"
         ),
         Json.obj(
           "date" -> "2019-03-27T02:13:37+0000",
           "amount" -> 100,
-          "balance" -> 200
+          "balance" -> 200,
+          "type" -> "cash_out"
         ),
         Json.obj(
           "date" -> "2019-03-20T02:13:37+0000",
           "amount" -> 100,
-          "balance" -> 100
+          "balance" -> 100,
+          "type" -> "cash_out"
         )
       )
     )

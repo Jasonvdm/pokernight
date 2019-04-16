@@ -1,13 +1,7 @@
 <template>
-    <b-container class="balance">
-        <b-row><h2>Balance</h2></b-row>
-        <b-row>
-            <q-btn label="My Button"></q-btn>
-        </b-row>
-        <b-row>
-            <h1 class="display-1">{{ balance | currency }}</h1>
-        </b-row>
-    </b-container>
+    <div>
+        <p class="q-ml-md">Your Balance: {{ balance | currency }}</p>
+    </div>
 </template>
 
 <script>
