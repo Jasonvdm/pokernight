@@ -41,6 +41,7 @@ const mutations = {
                         currency: 'USD',
                         minimumFractionDigits: 2
                     }).format(transaction.amount),
+                    type: transaction.type,
                     total: new Intl.NumberFormat('en-US', {
                         style: 'currency',
                         currency: 'USD',

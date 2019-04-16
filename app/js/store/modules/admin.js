@@ -5,22 +5,22 @@ const state = {
     games: [
         {
             'id': '4',
-            'date': '4/17',
+            'date': new Date('4/17/19'),
             'playerCount': 6,
         },
         {
             'id': '3',
-            'date': '4/10',
+            'date': new Date('4/10/19'),
             'playerCount': 5,
         },
         {
             'id': '2',
-            'date': '4/9',
+            'date': new Date('4/9/19'),
             'playerCount': 8,
         },
         {
             'id': '1',
-            'date': '4/5',
+            'date': new Date('4/5/19'),
             'playerCount': 3,
         },
     ]
@@ -32,6 +32,9 @@ const getters = {
     },
     getAllGames: () => {
         return state.games;
+    },
+    getAllFutureGames: () => {
+        return state.games.filter((game) => { return game.date >= new Date() });
     }
 };
 
@@ -77,7 +80,7 @@ const actions = {
         //     if (response.status === 200) {
                 commit('addGame', {
                     id: 5,
-                    date: new Date(newGameDate).getMonth() + '/' + new Date(newGameDate).getDate(),
+                    date: new Date(newGameDate),
                     playerCount: 0
                 });
             // }
