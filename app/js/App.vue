@@ -13,13 +13,8 @@
                     </span>
                 </q-toolbar-title>
                 <q-btn
-                        :color="navColor('transactions')"
-                        @click="navigate('transactions')"
-                        size="lg"
-                        flat round dense icon="attach_money"></q-btn>
-                <q-btn
-                        :color="navColor('charts')"
-                        @click="navigate('charts')"
+                        :color="navColor('stats')"
+                        @click="navigate('stats')"
                         size="lg"
                         flat round dense icon="show_chart"></q-btn>
                 <q-btn
@@ -34,7 +29,9 @@
                         flat round dense icon="fas fa-user-shield"></q-btn>
             </q-toolbar>
             <q-ajax-bar color="orange-12" />
-            <router-view></router-view>
+            <q-page padding>
+                <router-view></router-view>
+            </q-page>
         </q-page-container>
     </q-layout>
 </template>

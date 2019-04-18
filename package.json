@@ -3,6 +3,7 @@
   "scripts": {
     "watch": "webpack --watch",
     "app": "tape ./app/js/*.{js,vue}",
+    "start": "exit 0;",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "watch": {
@@ -44,5 +45,6 @@
     "vue-template-compiler": "^2.5.3",
     "vuetify-loader": "^1.0.5",
     "webpack": "^3.8.1"
-  }
+  },
+  "postinstall" : "./node_modules/webpack/bin/webpack.js --progress --hide-modules"
 }
